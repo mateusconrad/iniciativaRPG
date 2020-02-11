@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "101310810912",
+    "firebase_url": "https://rollini.firebaseio.com",
+    "project_id": "rollini",
+    "storage_bucket": "rollini.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101310810912:android:7956d0a732cbab8db52545",
+        "android_client_info": {
+          "package_name": "br.com.mateusconrad.rollini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101310810912-mencd0h25j29ukntmlhu4e448pn4angq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.mateusconrad.rollini",
+            "certificate_hash": "1a86742d74fb5f39b2f0d978c80a14c1e502618c"
+          }
+        },
+        {
+          "client_id": "101310810912-ffq5c3bt5v14tg2dn5bnrukc0nqeptkp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgAWTbJ-cdUN2XjfNLZuUPSKp1GPrPUKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101310810912-ffq5c3bt5v14tg2dn5bnrukc0nqeptkp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
