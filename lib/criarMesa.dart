@@ -49,18 +49,25 @@ class _CriarMesaState extends State<CriarMesa> {
       child: Text("Concluir"),
       color: Colors.indigo,
       onPressed: () {
+    Firestore.instance.collection("mesas").add({
+    "titulo": nomeMesa.text,
+    "status": 1,
+    "dataAbertura": getDiaMesAno(),
 
-        if (formkey.currentState.validate()){
-          Firestore.instance.collection("mesas").add({
-            "titulo": nomeMesa.text,
-            "status": 1,
-            "dataAbertura": getDiaMesAno(),
-          });
-
-          Navigator.of(context).pop();
-        }
       },
     );
+  });
   }
 
 }
+
+//        if (formkey.currentState.validate()){
+//          Firestore.instance.collection("mesas").add({
+//            "titulo": nomeMesa.text,
+//            "status": 1,
+//            "dataAbertura": getDiaMesAno(),
+//          }
+//          );
+//
+//          Navigator.of(context).pop();
+//        }*/

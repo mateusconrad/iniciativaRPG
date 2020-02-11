@@ -13,7 +13,7 @@ class _MesasState extends State<Mesas> {
     return Scaffold(
       appBar: _appBar(),
       body: ListaMesas(),
-     // floatingActionButton: _adicionaMesa(),
+      floatingActionButton: _adicionaMesa(),
       drawer: Drawer(),
     );
   }

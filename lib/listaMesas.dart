@@ -32,15 +32,13 @@ class _ListaMesasState extends State<ListaMesas> {
                         return Center(
                           child: Text(
                             "Não há mesas, Vá jogar!",
-                            style:
-                            TextStyle(color: Colors.redAccent, fontSize: 20),
+                            style:TextStyle(color: Colors.redAccent, fontSize: 20),
                           ),
                         );
                       }
                       return ListView.builder(
-                          itemCount: snapshot.data.documents.length,
-                          padding: EdgeInsets.only(
-                              top: 5, left: 5, right: 5, bottom: 10),
+                         // itemCount: snapshot.data.documents.length,
+                          padding: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 10),
                           itemBuilder: (context, index) {
                             return Card(
                                 child: Column(
