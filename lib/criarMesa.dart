@@ -49,12 +49,11 @@ class _CriarMesaState extends State<CriarMesa> {
       child: Text("Concluir"),
       color: Colors.indigo,
       onPressed: () {
-    Firestore.instance.collection("mesas").add({
-    "titulo": nomeMesa.text,
-    "status": 1,
-    "dataAbertura": getDiaMesAno(),
-
-      },
+        Firestore.instance.collection("mesas").add({
+          "titulo": nomeMesa.text,
+          //"status": 1,
+          //"dataAbertura": getDiaMesAno(),
+        },
     );
   });
   }
