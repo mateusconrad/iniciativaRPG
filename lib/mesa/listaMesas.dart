@@ -14,12 +14,14 @@ class _ListaMesasState extends State<ListaMesas> {
       children: <Widget>[
         Expanded(
             child: StreamBuilder(
+
                 stream: Firestore.instance
                     .collection("mesas")
-                    .where("status", isEqualTo: 1)
+                    .where("status", isEqualTo: '1')
                     //.orderBy("titulo", descending: false)
                     .snapshots(),
                 builder: (context, snapshot) {
+
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
                     case ConnectionState.done:
@@ -37,7 +39,7 @@ class _ListaMesasState extends State<ListaMesas> {
                         );
                       }
                       return ListView.builder(
-                         // itemCount: snapshot.data.documents.length,
+                          itemCount: snapshot.data.documents.length,
                           padding: EdgeInsets.only(top: 5, left: 5, right: 5, bottom: 10),
                           itemBuilder: (context, index) {
                             return Card(
