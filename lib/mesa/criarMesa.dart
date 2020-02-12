@@ -1,4 +1,6 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CriarMesa extends StatefulWidget {
@@ -7,30 +9,45 @@ class CriarMesa extends StatefulWidget {
 }
 
 class _CriarMesaState extends State<CriarMesa> {
-  String getDiaMesAno() {
-    String dia = DateTime.now().day.toString();
-    String mes = DateTime.now().month.toString();
-    String ano = DateTime.now().year.toString();
-    String diamesano = (dia + '/' + mes + '/' + ano);
-    return diamesano;
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  TextEditingController nomeMesa = TextEditingController();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+
+  @override
+  void initState() {
+    super.initState();
+    initUser();
   }
 
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  //colocar aqui o input para o email do mestre
-  TextEditingController nomeMesa = TextEditingController();
+  initUser() async {
+    user = await _auth.currentUser();
+    setState(() {
+      initUser();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    //Future<FirebaseUser> future = FirebaseAuth.instance.currentUser();
     return Scaffold(
       appBar: AppBar(
         title: Text("Criação de mesa"),
       ),
       body: Column(
         children: <Widget>[
-          _nomeMesa("Informe o nome"),
+          _formNomeMesa(),
           _btnCriarMesa(),
         ],
       ),
+    );
+  }
+
+  Form _formNomeMesa() {
+    return Form(
+      key: formkey,
+      child: _nomeMesa("Informe o nome"),
     );
   }
 
@@ -49,25 +66,35 @@ class _CriarMesaState extends State<CriarMesa> {
         child: Text("Concluir"),
         color: Colors.indigo,
         onPressed: () {
-          Firestore.instance.collection("mesas").add(
-            {
-              "nome": nomeMesa.text,
-              "status": '1',
-              //"dataAbertura": getDiaMesAno(),
-            },
-          );
-          Navigator.pop(context);
+          if (formkey.currentState.validate()) {
+            Firestore.instance.collection("mesas").add(
+              {
+                "nome": nomeMesa.text,
+                "status": '1',
+                "dataCriacao": getDiaMesAno(),
+                "horaCriacao": getHoraMinuto(),
+                "emailCriador": "${user?.email}"
+              },
+            );
+            Navigator.pop(context);
+          }
         });
   }
-}
 
-//        if (formkey.currentState.validate()){
-//          Firestore.instance.collection("mesas").add({
-//            "titulo": nomeMesa.text,
-//            "status": 1,
-//            "dataAbertura": getDiaMesAno(),
-//          }
-//          );
-//
-//          Navigator.of(context).pop();
-//        }*/
+  String getDiaMesAno() {
+    String dia = DateTime.now().day.toString();
+    String mes = DateTime.now().month.toString();
+    String ano = DateTime.now().year.toString();
+    String diamesano = (dia + '/' + mes + '/' + ano);
+    return diamesano;
+  }
+
+  String getHoraMinuto() {
+    String hora = DateTime.now().hour.toString();
+    String minuto = DateTime.now().minute.toString();
+
+    String horaChamado = (hora + ':' + minuto);
+
+    return horaChamado;
+  }
+}

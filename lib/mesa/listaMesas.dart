@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ListaMesas extends StatefulWidget {
@@ -7,8 +8,28 @@ class ListaMesas extends StatefulWidget {
 }
 
 class _ListaMesasState extends State<ListaMesas> {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  TextEditingController nomeMesa = TextEditingController();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+
+  @override
+  void initState() {
+    super.initState();
+    initUser();
+  }
+
+  initUser() async {
+    user = await _auth.currentUser();
+    setState(() {
+      initUser();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Future<FirebaseUser> future = FirebaseAuth.instance.currentUser();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -17,7 +38,7 @@ class _ListaMesasState extends State<ListaMesas> {
 
                 stream: Firestore.instance
                     .collection("mesas")
-                    .where("status", isEqualTo: '1')
+                    .where("status", isEqualTo: '1').where("nomeCriador", isEqualTo: "${user?.email}")
                     //.orderBy("titulo", descending: false)
                     .snapshots(),
                 builder: (context, snapshot) {

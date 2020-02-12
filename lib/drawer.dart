@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:rollini/login.dart';
+import 'package:rollini/login/login.dart';
+
+import 'login/login.dart';
 
 class MenuLateral extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class MenuLateral extends StatefulWidget {
 class _MenuLateralState extends State<MenuLateral> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser user;
-  Divider _divisor() => Divider(color: Colors.white10,height: 30,thickness: 2,);
+
 
   @override
   void initState() {
@@ -66,6 +68,8 @@ ListTile _listTileHelp(
         //Navigator.push(        context, MaterialPageRoute(builder: (context) => AjudaPage())),
   );
 }
+
+Divider _divisor() => Divider(color: Colors.white10,height: 30,thickness: 2,);
 
 ListTile _listTileGraphics(
     BuildContext context, IconData iconField, String title, String subTitle) {
